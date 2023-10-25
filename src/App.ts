@@ -2,8 +2,8 @@
 * See LICENSE.md in the project root for license terms and full copyright notice.
 *--------------------------------------------------------------------------------------------*/
 
-import { BriefcaseDb, BriefcaseManager, ECSqlStatement, IModelDb, IModelHost, IModelHostConfiguration } from "@itwin/core-backend";
-import { DbResult, Logger, LogLevel } from "@itwin/core-bentley";
+import { BriefcaseDb, BriefcaseManager, IModelDb, IModelHost, IModelHostConfiguration } from "@itwin/core-backend";
+import { Logger, LogLevel } from "@itwin/core-bentley";
 import { BriefcaseIdValue, LocalBriefcaseProps } from "@itwin/core-common";
 import { BackendIModelsAccess } from "@itwin/imodels-access-backend";
 import { NodeCliAuthorizationClient } from "@itwin/node-cli-authorization";
@@ -47,14 +47,17 @@ const APP_LOGGER_CATEGORY = "itwinjs-cli-app";
   const iModel: IModelDb = await openIModelFromIModelHub();
   Logger.logInfo(APP_LOGGER_CATEGORY, `iModel ${iModel.name} acquired and opened`);
 
-  // Querying the element  
+  // Querying the element
   const sql = "SELECT ECInstanceId, ECClassId FROM bis.element";
   Logger.logInfo(APP_LOGGER_CATEGORY, `Query: ${sql}`);
-  iModel.withPreparedStatement(sql, (stmt: ECSqlStatement) => {
-    while (stmt.step() === DbResult.BE_SQLITE_ROW) {
-      Logger.logInfo(APP_LOGGER_CATEGORY, `Id "${stmt.getValue(0).getId()}" classId "${stmt.getValue(1).getClassNameForClassId()}"`);
-    }
-  });
+
+  // Create a query reader
+  const queryReader = iModel.createQueryReader(sql);
+
+  // Execute the query
+  for await (const row of queryReader) {
+    Logger.logInfo(APP_LOGGER_CATEGORY, `Id "${row[0]}" classId "${row[1]}"`);
+  }
 
 })().catch((reason) => {
   process.stdout.write(`${JSON.stringify(reason)}\n`);
