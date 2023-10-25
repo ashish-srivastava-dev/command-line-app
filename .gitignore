@@ -1,6 +1,4 @@
 lib/
 node_modules/
-package-lock.json
+.env
 
-
-output_*.json
