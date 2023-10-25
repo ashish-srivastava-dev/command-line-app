@@ -1,5 +1,5 @@
 {
-  "name": "itwincmdapp",
+  "name": "command-line-app",
   "version": "1.0.0",
   "description": "Command line app to query an iTwin",
   "author": "Bentley Systems Inc.",

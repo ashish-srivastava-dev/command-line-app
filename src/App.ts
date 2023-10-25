@@ -64,7 +64,7 @@ const APP_LOGGER_CATEGORY = "itwinjs-cli-app";
 export async function openIModelFromIModelHub(): Promise<BriefcaseDb> {
   Logger.logInfo(APP_LOGGER_CATEGORY, AUTH_CLIENT_CONFIG_PROPS.clientId);
   if (!AUTH_CLIENT_CONFIG_PROPS.clientId || !AUTH_CLIENT_CONFIG_PROPS.scope || !AUTH_CLIENT_CONFIG_PROPS.redirectUri)
-    return Promise.reject("You must edit AUTH_CLIENT_CONFIG in Main.ts");
+    return Promise.reject("You must edit AUTH_CLIENT_CONFIG in App.ts");
 
   const authorizationClient = new NodeCliAuthorizationClient({ ...AUTH_CLIENT_CONFIG_PROPS });
   Logger.logInfo(APP_LOGGER_CATEGORY, "Attempting to sign in");
@@ -73,7 +73,7 @@ export async function openIModelFromIModelHub(): Promise<BriefcaseDb> {
   IModelHost.authorizationClient = authorizationClient;
 
   if (!IMODELHUB_REQUEST_PROPS.iTwinId || !IMODELHUB_REQUEST_PROPS.iModelId)
-    return Promise.reject("You must edit IMODELHUB_REQUEST_PROPS in Main.ts");
+    return Promise.reject("You must edit IMODELHUB_REQUEST_PROPS in App.ts");
 
   let briefcaseProps: LocalBriefcaseProps | undefined = getBriefcaseFromCache();
   if (!briefcaseProps)
