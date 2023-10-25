@@ -1,0 +1,47 @@
+{
+  "name": "itwincmdapp",
+  "version": "1.0.0",
+  "description": "Command line app to query an iTwin",
+  "author": "Bentley Systems Inc.",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "start": "ts-node src/app.ts",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc 1>&2",
+    "lint": "eslint -f visualstudio \"./src/**/*.ts\" 1>&2",
+    "clean": "rimraf lib"
+  },
+  "repository": {},
+  "dependencies": {
+    "@itwin/core-backend": "^4.1.5",
+    "@itwin/core-bentley": "^4.1.5",
+    "@itwin/core-common": "^4.1.5",
+    "@itwin/core-electron": "^4.1.5",
+    "@itwin/core-frontend": "^4.1.5",
+    "@itwin/core-geometry": "^4.1.5",
+    "@itwin/core-i18n": "^4.1.5",
+    "@itwin/core-quantity": "^4.1.5",
+    "@itwin/ecschema-metadata": "^4.1.5",
+    "@itwin/imodels-access-backend": "^4.0.5",
+    "@itwin/node-cli-authorization": "^1.0.1",
+    "@itwin/webgl-compatibility": "^4.1.5",
+    "dotenv": "^16.3.1"
+  },
+  "devDependencies": {
+    "@itwin/build-tools": "^4.1.5",
+    "@itwin/eslint-plugin": "^3.7.8",
+    "@types/dotenv": "^8.2.0",
+    "@types/node": "^18.17.15",
+    "eslint": "^7.11.0",
+    "rimraf": "^5.0.1",
+    "ts-node": "^10.9.1",
+    "typescript": "~5.0.2"
+  },
+  "eslintConfig": {
+    "plugins": [
+      "@itwin"
+    ],
+    "extends": "plugin:@itwin/itwinjs-recommended"
+  }
+}

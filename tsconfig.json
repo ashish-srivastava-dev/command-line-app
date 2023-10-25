@@ -1,0 +1,11 @@
+{
+  "extends": "./node_modules/@itwin/build-tools/tsconfig-base.json",
+  "compilerOptions": {
+    "skipLibCheck": true,
+    "outDir": "./lib",
+    "baseUrl": "./node_modules/",
+    "types": ["node"],
+    "esModuleInterop": true
+  },
+  "include": ["./src/**/*.ts"]
+}
